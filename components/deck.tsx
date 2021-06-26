@@ -81,6 +81,7 @@ function Deck(props) {
               </TinderCard>
             </div>
           )}
+          <h3 className="no-jobs centre-translate">No Jobs Remaining</h3>
         </div>
         <div className='job-interest'>
           <button onClick={() => swipe('left')} className="button-interest red">
