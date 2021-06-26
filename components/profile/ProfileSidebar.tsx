@@ -9,6 +9,7 @@ const ProfileSidebar = (props) =>{
         position: props.noDropdown ? "relative" : "absolute",
         marginTop: (props.noDropdown ? "0" : "75"),
         marginRight: props.margin,
+        display: (props.static ? "flex" : "none")
     }
       
       const fillerImage = [

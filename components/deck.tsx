@@ -55,32 +55,33 @@ function Deck(props) {
 
   return (
     <>
-      <div className='deck centre-translate'>
-        <>
+      <div className='deck'>
+        <div className="card-collection">
           {jobs.map((job, index) =>
             <div key={job.id} className='card'>
-            <TinderCard ref={childRefs[index]} onSwipe={(dir) => swiped(dir, job.id)} onCardLeftScreen={() => outOfFrame(job.id)}>
-              <div className="job-img-wrapper">
-                {/*eslint-disable-next-line @next/next/no-img-element*/}
-                <img className="card-image" src={job.job_image} alt={job.title}/>
-              </div>
-              <div className="job-details-wrapper">
-                <div className="job-details">
-                  <h2 className="job-title">{job.title}</h2>
-
-                  <ul className="job-detail-list">
-                    <li className="job-detail-list-item"><FontAwesomeIcon className="fa-lg card-icon" icon={faPoundSign} /><span className="job-info">{job.pay}</span></li>
-                    <li className="job-detail-list-item"><FontAwesomeIcon className="fa-lg card-icon" icon={faMapPin} /><span className="job-info">{job.location}</span></li>
-                    <li className="job-detail-list-item"><FontAwesomeIcon className="fa-lg card-icon" icon={faUser} /><span className="job-info">{job.type}</span></li>
-                  </ul>
+              <TinderCard ref={childRefs[index]} onSwipe={(dir) => swiped(dir, job.id)} onCardLeftScreen={() => outOfFrame(job.id)}>
+                <div className="job-img-wrapper">
                   {/*eslint-disable-next-line @next/next/no-img-element*/}
-                  <img className="job-company-logo" src={job.company_logo} alt={job.company}/>
-
+                  <img className="card-image" src={job.job_image} alt={job.title} />
                 </div>
-              </div>
-            </TinderCard>
+                <div className="job-details-wrapper">
+                  <div className="job-details">
+                    <h2 className="job-title">{job.title}</h2>
+
+                    <ul className="job-detail-list">
+                      <li className="job-detail-list-item"><FontAwesomeIcon className="fa-lg card-icon" icon={faPoundSign} /><span className="job-info">{job.pay}</span></li>
+                      <li className="job-detail-list-item"><FontAwesomeIcon className="fa-lg card-icon" icon={faMapPin} /><span className="job-info">{job.location}</span></li>
+                      <li className="job-detail-list-item"><FontAwesomeIcon className="fa-lg card-icon" icon={faUser} /><span className="job-info">{job.type}</span></li>
+                    </ul>
+                    {/*eslint-disable-next-line @next/next/no-img-element*/}
+                    <img className="job-company-logo" src={job.company_logo} alt={job.company} />
+
+                  </div>
+                </div>
+              </TinderCard>
             </div>
-          )}</>
+          )}
+        </div>
         <div className='job-interest'>
           <button onClick={() => swipe('left')} className="button-interest red">
             <FontAwesomeIcon className="fa-lg centre-translate" icon={faTimes} />

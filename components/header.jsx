@@ -38,7 +38,7 @@ const Header = (props) => {
 
             </div>
             {   
-                path === "profile" ? null : <ProfileRight user={props.user} margin={showMenu}></ProfileRight>
+                path === "profile" ? null : <ProfileRight static={true} user={props.user} margin={showMenu}></ProfileRight>
             }
 
         </header>

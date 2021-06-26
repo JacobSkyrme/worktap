@@ -55,8 +55,8 @@ const UserProfile = (props: InferGetServerSidePropsType<typeof getServerSideProp
     <EditContext.Provider value={editMode}>
       <div className="root">
 
-        <Header user={props.user}></Header>
         <div className="wt-container"> 
+          <Header user={props.user}></Header>
           <Sidebar></Sidebar>
           <main className="wt-content">
             <button style={{height: 50}} onClick={() => setEditMode(!editMode)}>Toggle edit</button>
@@ -69,7 +69,7 @@ const UserProfile = (props: InferGetServerSidePropsType<typeof getServerSideProp
               </div>
             </div>
 
-            <ProfileRight user={props.user} margin={0} noDropdown={true}></ProfileRight>
+            <ProfileRight static={false} user={props.user} margin={0} noDropdown={true}></ProfileRight>
           </main>
         </div>
 

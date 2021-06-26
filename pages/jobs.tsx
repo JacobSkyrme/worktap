@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import nookies from 'nookies';
 import { firebaseAdmin } from '../firebase/firebaseAdmin';
-import { firebaseClient } from '../firebase/firebaseClient';
 import Deck from '../components/deck'
+import { firebaseClient } from '../firebase/firebaseClient';
 import Header from "../components/header"
 import Sidebar from "../components/sidebar"
 import { CircularProgress } from '@material-ui/core';
@@ -65,8 +65,8 @@ const Jobs = (props: InferGetServerSidePropsType<typeof getServerSideProps>) => 
   return (
     <div className="page-gradient root">
 
-      <Header user={props.user}></Header>
       <div className="wt-container">
+        <Header user={props.user}></Header>
         <Sidebar></Sidebar>
         <main className="wt-content">
           {loading && loadingMin ? <Deck data={jobs}></Deck> : <CircularProgress className="centre-translate" />}

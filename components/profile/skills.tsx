@@ -61,7 +61,7 @@ const Skills = (props) => {
 
     useEffect(() => {
         FetchData();
-    }, [FetchData]);
+    }, []);
 
 
     //TODO Add confirmation to the delete function.

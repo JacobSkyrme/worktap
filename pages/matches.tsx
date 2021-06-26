@@ -61,15 +61,18 @@ const Matches = (props: InferGetServerSidePropsType<typeof getServerSideProps>) 
       .then(documents => {
 
         let dataHold = new Array();
+        let i = 0;
         documents.forEach((doc) => {
           const job = doc.data()
           job.job_ref.get().then(snap => {
             dataHold.push({ ...snap.data(), id: doc.id })
           })
+            if(i === documents.size -1){
+              setLoading(true)
+            }
+          i++;
         });
         setMatches(dataHold)
-        setLoading(true)
-
       }).catch(err => {
         /* error! */
         console.log("error")
@@ -81,7 +84,7 @@ const Matches = (props: InferGetServerSidePropsType<typeof getServerSideProps>) 
   useEffect(() => {
     setTimeout(function () {
       setLoadingMin(true)
-    }, 500);
+    }, 1000);
   })
   const removeMatch = (id) =>{
     let db = firebaseClient.firestore();
@@ -98,21 +101,21 @@ const Matches = (props: InferGetServerSidePropsType<typeof getServerSideProps>) 
 
   return (
     <div className="root">
-      <Header user={props.user}></Header>
       <div className="wt-container">
+        <Header user={props.user}></Header>
         <Sidebar></Sidebar>
-        <main className="wt-content">
-          {loading && loadingMin ? 
+        <main className="wt-content matches-container">
+          {loading === true && loadingMin === true ? 
           <div className="match-wrapper">
             {matches.length === 0 ? <div className="match-row"><h2 className="no-matches">No Matches Found!</h2></div> :
             <>
-            {matches.map((match, index) =>
+            {matches.map((match) =>
               <div className="match-row" key={match.id}>
                 <div className="match-img-container">
                   {/*eslint-disable-next-line @next/next/no-img-element*/}
                   <img className="match-icon" src={match.company_logo} alt="Company Logo"/>
                 </div>
-                <div className="job-details" style={{width: "auto", flexGrow: 1}}>
+                <div className="job-details">
                   <h2 className="job-title">{match.title}</h2>
                   <ul className="job-detail-list">
                     <li className="job-detail-list-item"><FontAwesomeIcon className="fa-lg card-icon" icon={faPoundSign} /><span className="job-info">{match.pay}</span></li>

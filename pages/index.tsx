@@ -42,8 +42,8 @@ const Home = (props: InferGetServerSidePropsType<typeof getServerSideProps>) => 
   
   return(
       <div className="page-gradient root">
-        <Header user={props.user}></Header>
         <div className="wt-container"> 
+          <Header user={props.user}></Header>
           <Sidebar></Sidebar>
           <main className="wt-content">
             <div className="medium-container centre-translate">

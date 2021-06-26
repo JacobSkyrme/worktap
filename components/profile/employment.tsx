@@ -59,7 +59,7 @@ const Employment = (props) => {
 
     useEffect(() => {
         FetchData();
-    }, [FetchData]);
+    }, []);
 
 
     //TODO Add confirmation to the delete function.
