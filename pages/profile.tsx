@@ -20,9 +20,10 @@ import { InferGetServerSidePropsType, GetServerSidePropsContext } from 'next';
 
 export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
   const cookies = nookies.get(ctx);
+
+
   try {
     const user = await firebaseAdmin.auth().verifyIdToken(cookies.token);
-
     return {
       props: { user },
     };
@@ -39,6 +40,7 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
     };
   }
 };
+
 export const EditContext = React.createContext(false)
 
 

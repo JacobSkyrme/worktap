@@ -16,19 +16,16 @@ import { CircularProgress } from '@material-ui/core';
 import Sidebar from '../components/sidebar';
 
 export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
+  const cookies = nookies.get(ctx);
+
+
   try {
-    const cookies = nookies.get(ctx);
-
-    console.log(JSON.stringify(cookies, null, 2));
     const user = await firebaseAdmin.auth().verifyIdToken(cookies.token);
-
     return {
-      props: { user: user }
+      props: { user },
     };
   } catch (err) {
-    // either the `token` cookie didn't exist
-    // or token verification failed
-    // either way: redirect to the login page
+    console.log(err)
     return {
       redirect: {
         permanent: false,
@@ -57,9 +54,8 @@ const Matches = (props: InferGetServerSidePropsType<typeof getServerSideProps>) 
   useEffect(() => {
     // Update the document title using the browser API
     let jobs = firebaseClient.firestore();
-    jobs.collection('matches').where('user_id', '==', user.uid).get()
+    jobs.collection('matches').where('user_id', '==', user ? user.uid : "").get()
       .then(documents => {
-
         let dataHold = new Array();
         let i = 0;
         documents.forEach((doc) => {
@@ -74,7 +70,6 @@ const Matches = (props: InferGetServerSidePropsType<typeof getServerSideProps>) 
         });
         setMatches(dataHold)
       }).catch(err => {
-        /* error! */
         console.log("error")
         console.log(err)
       });

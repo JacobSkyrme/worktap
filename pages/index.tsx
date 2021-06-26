@@ -1,25 +1,23 @@
 import React from 'react';
 import nookies from 'nookies';
 import { firebaseAdmin } from '../firebase/firebaseAdmin';
+import {firebaseClient} from '../firebase/firebaseClient'
 import Header from "../components/header"
 import 'firebase/firestore';
 import Sidebar from '../components/sidebar';
 import { InferGetServerSidePropsType, GetServerSidePropsContext } from 'next';
 
 export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
+  const cookies = nookies.get(ctx);
+
+
   try {
-    const cookies = nookies.get(ctx);
-
-    console.log(JSON.stringify(cookies, null, 2));
     const user = await firebaseAdmin.auth().verifyIdToken(cookies.token);
-
     return {
-      props: { user: user }
+      props: { user },
     };
   } catch (err) {
-    // either the `token` cookie didn't exist
-    // or token verification failed
-    // either way: redirect to the login page
+    console.log(err)
     return {
       redirect: {
         permanent: false,
@@ -33,12 +31,32 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
 };
 
 
-
-
-
-
 const Home = (props: InferGetServerSidePropsType<typeof getServerSideProps>) => {
-  
+
+
+  let data = {
+    company: "Daniel Owen Ltd",
+    company_logo: "https://firebasestorage.googleapis.com/v0/b/worktap-7e14f.appspot.com/o/company-logos%2Fdaniel-owen.png?alt=media",
+    job_image: "https://firebasestorage.googleapis.com/v0/b/worktap-7e14f.appspot.com/o/card-backgrounds%2FLabourers-1-a.jpg?alt=media",
+    location: "Portsmouth",
+    pay: "£11.35 Per Hour",
+    sector: "Construction",
+    title: "Labourer",
+    type: "Contract"
+  }
+
+  function createJob(){
+    let db = firebaseClient.firestore();
+    db.collection('jobs').doc().set(data)
+    .then(() => {
+      console.log("Success")
+      //Refreshes the area data.
+    }).catch(err => {
+      console.log(err)
+    })
+
+
+  }
   
   return(
       <div className="page-gradient root">
@@ -48,6 +66,7 @@ const Home = (props: InferGetServerSidePropsType<typeof getServerSideProps>) => 
           <main className="wt-content">
             <div className="medium-container centre-translate">
               <h1 className="text-white">Welcome To Worktap</h1>
+              <a onClick={createJob}>CLICK ME</a>
             </div>
           </main>
         </div>

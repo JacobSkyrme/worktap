@@ -7,6 +7,7 @@ import Header from "../components/header"
 import Sidebar from "../components/sidebar"
 import { CircularProgress } from '@material-ui/core';
 import { InferGetServerSidePropsType, GetServerSidePropsContext } from 'next';
+import { useAuth } from '../firebase/auth';
 
 export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
   const cookies = nookies.get(ctx);
@@ -33,6 +34,7 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
 
 const Jobs = (props: InferGetServerSidePropsType<typeof getServerSideProps>) => {
 
+  const { user } = useAuth();
 
   const [loading, setLoading] = useState(false);
   const [loadingMin, setLoadingMin] = useState(false);
@@ -40,12 +42,32 @@ const Jobs = (props: InferGetServerSidePropsType<typeof getServerSideProps>) => 
 
   useEffect(() => {
     // Update the document title using the browser API
-    let jobs = firebaseClient.firestore();
-    jobs.collection('jobs').get()
+
+
+    let db = firebaseClient.firestore();
+    let matches = []
+
+    db.collection('matches')
+    db.collection('matches').where('user_id', '==', user ? user.uid : "").get()
+      .then(documents => {
+
+        documents.forEach((doc) => matches.push(doc.data().job_id));
+      }).catch(err => {
+        /* error! */
+        console.log("error")
+        console.log(err)
+      });
+      console.log(matches)
+
+    db.collection('jobs').get()
       .then(documents => {
 
         let dataHold = [];
         documents.forEach((doc) => dataHold.push({ ...doc.data(), id: doc.id }));
+
+        
+        dataHold = dataHold.filter(data => !matches.includes(data.id))
+        console.log(dataHold)
         setJobs(dataHold)
         setLoading(true)
       }).catch(err => {

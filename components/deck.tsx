@@ -26,7 +26,7 @@ function Deck(props) {
     if (direction === 'right') {
       let db = firebaseClient.firestore();
       let jobRef = db.collection("jobs").doc(id)
-      db.collection('matches').doc(`${user.uid}.${id}`).set({ user_id: user.uid, job_ref: jobRef })
+      db.collection('matches').doc(`${user.uid}.${id}`).set({ user_id: user.uid, job_ref: jobRef, job_id: id })
         .then(() => {
           console.log("Success")
           //Refreshes the area data.
