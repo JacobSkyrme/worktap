@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useContext, createContext} from 'react';
+import React, { useState, useEffect, useContext, createContext } from 'react';
 import { firebaseAdmin } from '../firebase/firebaseAdmin';
 import nookies from 'nookies';
 import 'firebase/firestore';
@@ -8,6 +8,7 @@ import Education from "../components/profile/education"
 import Employment from "../components/profile/employment"
 import ProfileRight from "../components/profile/ProfileSidebar"
 import { InferGetServerSidePropsType, GetServerSidePropsContext } from 'next';
+import { FormControlLabel, Switch } from '@material-ui/core';
 
 //TODO Implement all 3 profile input sections.                  1
 //TODO Setup account setup wizard.                              2
@@ -49,18 +50,34 @@ const UserProfile = (props: InferGetServerSidePropsType<typeof getServerSideProp
 
   const [editMode, setEditMode] = useState(false);
 
-  return(
+  const handleChange = (event) => {
+    setEditMode(!editMode);
+  };
+
+
+  return (
 
     <EditContext.Provider value={editMode}>
       <div className="root">
 
-        <div className="wt-container"> 
+        <div className="wt-container">
           <Header user={props.user}></Header>
           <Sidebar></Sidebar>
           <main className="wt-content">
-            <button style={{height: 50}} onClick={() => setEditMode(!editMode)}>Toggle edit</button>
-            <div style={{width: "100%"}}>
-              <div className="medium-container">
+            <div style={{ width: "100%" }}>
+              <div className="medium-container profile-container">
+                <FormControlLabel 
+                  control={
+                    <Switch
+                      checked={editMode}
+                      onChange={handleChange}
+                      name="checkedB"
+                      color="primary"
+                    />
+                  }
+                  label="Toggle Edit"
+                  className="edit-toggle"
+                />
                 <Education user={props.user}></Education>
                 <Employment user={props.user}></Employment>
 
@@ -72,7 +89,7 @@ const UserProfile = (props: InferGetServerSidePropsType<typeof getServerSideProp
         </div>
 
       </div>
-    </EditContext.Provider>
-    )
+    </EditContext.Provider >
+  )
 }
 export default UserProfile;

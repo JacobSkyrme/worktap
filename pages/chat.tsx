@@ -53,7 +53,7 @@ const Chat = (props: InferGetServerSidePropsType<typeof getServerSideProps>) => 
       <div className="wt-container">
         <Header user={props.user}></Header>
         <Sidebar></Sidebar>
-        <main className="wt-content matches-container">
+        <main className="wt-content matches-container medium-container">
           <div className="messages">
             <div className="message-wrapper" style={{borderTop: '1px solid #ddd'}}> 
               <div className="ribbon check" style={{backgroundColor: '#2ecc71'}}>
