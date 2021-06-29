@@ -287,6 +287,9 @@ select:-webkit-autofill:focus {
   user-select: none;
 }
 
+.card{
+  z-index: 1;
+}
 
 .card-top-text {
   position: absolute;
@@ -541,7 +544,6 @@ select:-webkit-autofill:focus {
 }
 
 
-
 /* Toggle Switch Style */
 /* The switch - the box around the slider */
 .switch {
@@ -775,6 +777,74 @@ a {
   padding: 1em 0px 0.5em 0em;
 }
 
+.message-content{
+  display: block;
+  width: 100%;
+}
+.message-img{
+  width: 100%;
+  height: 100%;
+  max-height: 90px;
+  padding: 0.7em;
+  object-fit: contain;
+  border-radius: 12px;
+}
+.message-wrapper{
+  display: flex;
+  position: relative;
+  min-height: 100px;
+  border-bottom: 1px solid #ddd;
+}
+.message-img-wrapper{
+  width: 20%;
+  display: flex;
+  align-items: center;
+  position: relative;
+  min-width: 100px;
+}
+.message-details{
+  width: 80%;
+  padding: 0.8em;
+}
+.message-title{
+  text-align: left;
+  padding-top: 0;
+  margin-top: 0.5em !important;
+}
+
+.message-details p{
+  color: #aaa;
+  margin: 0;
+  font-size: 0.8em;
+}
+.messages-content{
+  padding: 0;
+}
+.messages{
+  margin: 1em 0;
+}
+
+.MuiTypography-body1{
+  font-weight: 500 !important;
+}
+
+.filter-modal-wrapper{
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.85);
+  width: 100%;
+  height: 100%;
+  z-index: 100;
+}
+.filter-modal{
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  max-width: 350px;
+  max-height: 500px;
+  border-radius: 12px;
+  padding: 2em 3em;
+}
+
 /* Header */
 .button {
   background-color: white;
@@ -782,6 +852,7 @@ a {
   color: #333;
   padding: 0.8em;
   font-size: 0.9em;
+  cursor: pointer;
 }
 
 .button-icon {
@@ -790,8 +861,12 @@ a {
 
 .header-content {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   width: 100%;
+  max-width: 350px;
+  margin: 0 auto;
+  margin-bottom: 1em;
+  z-index: 1000;
 }
 
 .page-content {
@@ -1111,6 +1186,36 @@ a {
   }
 
 }
+
+/* Ribbon */
+.ribbon {
+  position: absolute;
+  top: -18px;
+  margin-left: 3px;
+  filter: drop-shadow(2px 3px 2px rgba(0, 0, 0, 0.5));
+  transform: scale(0.75);
+  height: 36px;
+  z-index: 1;
+  border-radius: 100%;
+  padding: 2px;
+}
+.ribbon > .content {
+  color: white;
+  margin-top: -4px;
+  font-size: 1.25rem;
+  text-align: center;
+  font-weight: 400;
+  padding: 8px 2px 4px;
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 100%, 0 100%);
+  width: var(--width, 32px);
+  min-height: var(--height, 36px);
+  transition: clip-path 1s, padding 1s, background 1s;
+}
+
+.ribbon.up > .content {
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 50% calc(100% - 8px), 0 100%);
+}
+
 
 
 @media only screen and (max-width: 768px){

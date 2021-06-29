@@ -1,11 +1,14 @@
 import React, { useState, useMemo, useEffect } from 'react'
 // import TinderCard from '../react-tinder-card/index'
 import TinderCard from 'react-tinder-card'
-import { faPoundSign, faUser, faMapPin, faTimes, faCheck } from '@fortawesome/free-solid-svg-icons'
+import { faPoundSign, faUser, faMapPin, faTimes, faCheck, faFilter } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { firebaseClient } from "../firebase/firebaseClient"
 import 'firebase/firestore';
+
 import { useAuth } from "../firebase/auth";
+import { Checkbox, FormControl, FormControlLabel, FormGroup, FormLabel, Radio, Slider } from '@material-ui/core'
+import Typography from '@material-ui/core/Typography';
 
 
 const alreadyRemoved = []
@@ -18,7 +21,9 @@ function Deck(props) {
   const childRefs = useMemo<any>(() => Array(props.data.length).fill(0).map(i => React.createRef()), [props])
   const [jobs, setJobs] = useState(props.data)
   const { user } = useAuth();
-
+  const [filter, setFilter] = useState(false);
+  const [paySlider, setPaySlider] = React.useState([0, 30]);
+  const [distanceSlider, setDistanceSlider] = React.useState([0, 500]);
 
   const swiped = (direction, id) => {
 
@@ -53,9 +58,96 @@ function Deck(props) {
     }
   }
 
+  const handlePaySlider = (event, newValue) => {
+    setPaySlider(newValue);
+  };
+
+  const handleDistanceSlider = (event, newValue) => {
+    setDistanceSlider(newValue);
+  };
+
+
+
+  const [state, setState] = React.useState({
+    fullTime: false,
+    partTime: false,
+    apprenticeship: false,
+    workExperience: false,
+  });
+
+  const handleChange = (event) => {
+    setState({ ...state, [event.target.name]: event.target.checked });
+  };
+
+  const { fullTime, partTime, apprenticeship, workExperience } = state;
+
   return (
     <>
+      {filter ?
+        <div className="filter-modal-wrapper">
+          <div className="filter-modal centre-translate">
+            <Typography id="range-slider" gutterBottom>
+              Pay Range (Per Hour)
+            </Typography>
+            <Slider
+              value={paySlider}
+              onChange={handlePaySlider}
+              valueLabelDisplay="auto"
+              aria-labelledby="range-slider"
+              marks={[{ value: 5, label: "£5.00" }, { value: 30, label: "£30.00" }]}
+              min={5}
+              max={30}
+              step={0.5}
+            />
+            <Typography id="range-slider" gutterBottom>
+              Distance Range (Miles)
+            </Typography>
+            <Slider
+              value={distanceSlider}
+              onChange={handleDistanceSlider}
+              valueLabelDisplay="auto"
+              aria-labelledby="range-slider"
+              marks={[{ value: 5, label: "0 Miles" }, { value: 500, label: "500 Miles" }]}
+              min={0}
+              max={500}
+              step={25}
+            />
+
+            <div className="job-filter-type">
+              <h2 className="MuiTypography-body1">Job Type (Multiple Choice)</h2>
+            <FormControl component="fieldset">
+              <FormGroup>
+                <FormControlLabel
+                  control={<Checkbox checked={fullTime} onChange={handleChange} name="fullTime" />}
+                  label="Full Time"
+                />
+                <FormControlLabel
+                  control={<Checkbox checked={partTime} onChange={handleChange} name="partTime" />}
+                  label="Part Time"
+                />
+                <FormControlLabel
+                  control={<Checkbox checked={apprenticeship} onChange={handleChange} name="apprenticeship" />}
+                  label="Apprenticeship"
+                />
+                <FormControlLabel
+                  control={<Checkbox checked={workExperience} onChange={handleChange} name="workExperience" />}
+                  label="Work Experience"
+                />
+              </FormGroup>
+            </FormControl>
+            </div>
+
+
+          </div>
+        </div> : null}
       <div className='deck'>
+        <div className="header-content">
+          <div className="button" onClick={() => setFilter(!filter)}>
+            <FontAwesomeIcon className="fa-lg button-icon fa-filter" icon={faFilter} />
+            <span>Filters</span>
+          </div>
+        </div>
+
         <div className="card-collection">
           {jobs.map((job, index) =>
             <div key={job.id} className='card'>
@@ -96,7 +188,5 @@ function Deck(props) {
 
   )
 }
-
-
 
 export default Deck

@@ -1,11 +1,13 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react'
 import nookies from 'nookies';
 import { firebaseAdmin } from '../firebase/firebaseAdmin';
-import {firebaseClient} from '../firebase/firebaseClient'
+import Deck from '../components/deck'
+import { firebaseClient } from '../firebase/firebaseClient';
 import Header from "../components/header"
-import 'firebase/firestore';
-import Sidebar from '../components/sidebar';
+import Sidebar from "../components/sidebar"
+import { CircularProgress } from '@material-ui/core';
 import { InferGetServerSidePropsType, GetServerSidePropsContext } from 'next';
+import { useAuth } from '../firebase/auth';
 
 export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
   const cookies = nookies.get(ctx);
@@ -30,48 +32,70 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
   }
 };
 
+const Jobs = (props: InferGetServerSidePropsType<typeof getServerSideProps>) => {
 
-const Home = (props: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+  const { user } = useAuth();
+
+  const [loading, setLoading] = useState(false);
+  const [loadingMin, setLoadingMin] = useState(false);
+  const [jobs, setJobs] = useState([])
+
+  useEffect(() => {
+    // Update the document title using the browser API
 
 
-  let data = {
-    company: "Daniel Owen Ltd",
-    company_logo: "https://firebasestorage.googleapis.com/v0/b/worktap-7e14f.appspot.com/o/company-logos%2Fdaniel-owen.png?alt=media",
-    job_image: "https://firebasestorage.googleapis.com/v0/b/worktap-7e14f.appspot.com/o/card-backgrounds%2FLabourers-1-a.jpg?alt=media",
-    location: "Portsmouth",
-    pay: "£11.35 Per Hour",
-    sector: "Construction",
-    title: "Labourer",
-    type: "Contract"
-  }
-
-  function createJob(){
     let db = firebaseClient.firestore();
-    db.collection('jobs').doc().set(data)
-    .then(() => {
-      console.log("Success")
-      //Refreshes the area data.
-    }).catch(err => {
-      console.log(err)
-    })
+    let matches = []
 
+    db.collection('matches')
+    db.collection('matches').where('user_id', '==', user ? user.uid : "").get()
+      .then(documents => {
 
-  }
-  
-  return(
-      <div className="page-gradient root">
-        <div className="wt-container"> 
-          <Header user={props.user}></Header>
-          <Sidebar></Sidebar>
-          <main className="wt-content">
-            <div className="medium-container centre-translate">
-              <h1 className="text-white">Welcome To Worktap</h1>
-              <a onClick={createJob}>CLICK ME</a>
-            </div>
-          </main>
-        </div>
+        documents.forEach((doc) => matches.push(doc.data().job_id));
+      }).catch(err => {
+        /* error! */
+        console.log("error")
+        console.log(err)
+      });
+      console.log(matches)
+
+    db.collection('jobs').get()
+      .then(documents => {
+
+        let dataHold = [];
+        documents.forEach((doc) => dataHold.push({ ...doc.data(), id: doc.id }));
+
+        
+        dataHold = dataHold.filter(data => !matches.includes(data.id))
+        console.log(dataHold)
+        setJobs(dataHold)
+        setLoading(true)
+      }).catch(err => {
+        /* error! */
+        console.log("error")
+        console.log(err)
+      });
+    // or
+  }, []);
+
+  useEffect(() => {
+    setTimeout(function () {
+      setLoadingMin(true)
+    }, 500);
+  })
+
+  return (
+    <div className="page-gradient root">
+      <Header user={props.user}></Header>
+      <div className="wt-container">
+        <Sidebar></Sidebar>
+        <main className="wt-content">
+          {loading && loadingMin ? <Deck data={jobs}></Deck> : <CircularProgress className="centre-translate" />}
+        </main>
       </div>
-);
+    </div>
+  )
 }
+export default Jobs;
 
-export default Home;
+

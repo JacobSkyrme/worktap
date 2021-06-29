@@ -12,7 +12,7 @@ const Sidebar = (props) => {
             <ul className="wt-menu">
 
                 <> 
-                    <Link href="/jobs">
+                    <Link href="/">
                     <li>
                         <FontAwesomeIcon className="fa-lg menu-icon" icon={faSearch}/>
                         <span className="sidebar-text">Jobs</span>
@@ -24,7 +24,7 @@ const Sidebar = (props) => {
                         <span className="sidebar-text">Matches</span>
                     </li>
                     </Link>
-                    <Link href="/">
+                    <Link href="/chat">
                     <li>
                         <FontAwesomeIcon className="fa-lg menu-icon" icon={faComment}/>
                         <span className="sidebar-text">Chat</span>
