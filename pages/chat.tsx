@@ -67,7 +67,7 @@ const Chat = (props: InferGetServerSidePropsType<typeof getServerSideProps>) => 
               </div>
               <div className="message-details">
                 <h3 className="message-title matches-title job-title">Personal Cruise Advisor</h3>
-                <p>Thanks for applying for 'personal cruise advisor' You'll hear back from our HR team regarding your interview!</p>
+                <p>{"Thanks for applying for 'personal cruise advisor' You'll hear back from our HR team regarding your interview!"}</p>
               </div>
             </div>
             <div className="message-wrapper">

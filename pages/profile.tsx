@@ -49,9 +49,6 @@ const UserProfile = (props: InferGetServerSidePropsType<typeof getServerSideProp
 
   const [editMode, setEditMode] = useState(false);
 
-  
-
-
   return(
 
     <EditContext.Provider value={editMode}>
@@ -66,7 +63,6 @@ const UserProfile = (props: InferGetServerSidePropsType<typeof getServerSideProp
               <div className="medium-container">
                 <Education user={props.user}></Education>
                 <Employment user={props.user}></Employment>
-                {/*<Skills user={props.user}></Skills>*/}
 
               </div>
             </div>

@@ -58,7 +58,7 @@ const ProfileSidebar = (props) =>{
                 {fillerImage.map((url, index) => 
                     /*eslint-disable-next-line @next/next/no-img-element*/
                     <img key={index} src={url} className="miniGalleryImg" alt={`Gallery Image ${index}`}/>
-                )}n
+                )}
             </div>
 
 
