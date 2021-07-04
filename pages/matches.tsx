@@ -11,7 +11,7 @@ import { InferGetServerSidePropsType, GetServerSidePropsContext } from 'next';
 import 'firebase/firestore';
 import { firebaseClient } from "../firebase/firebaseClient"
 import { CircularProgress } from '@material-ui/core';
-
+import MatchDemo from "../components/match-demo"
 
 import Sidebar from '../components/sidebar';
 
@@ -50,6 +50,8 @@ const Matches = (props: InferGetServerSidePropsType<typeof getServerSideProps>) 
   const [matches, setMatches] = useState([]);
   const [loadingMin, setLoadingMin] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [showDemo, setShowDemo] = useState(false);
+
 
   useEffect(() => {
     // Update the document title using the browser API
@@ -99,9 +101,13 @@ const Matches = (props: InferGetServerSidePropsType<typeof getServerSideProps>) 
       <div className="wt-container">
         <Header user={props.user}></Header>
         <Sidebar></Sidebar>
+        {showDemo ? <MatchDemo closeWindow={setShowDemo}></MatchDemo> : null}
         <main className="wt-content matches-container medium-container">
           {loading === true && loadingMin === true ? 
           <div className="match-wrapper">
+            <div className="match-row demo-match-row" onClick={() => setShowDemo(true)}>
+              <h2 className="demo-match-row-heading">Demo Match</h2>
+            </div>
             {matches.length === 0 ? <div className="match-row"><h2 className="no-matches">No Matches Found!</h2></div> :
             <>
             {matches.map((match) =>

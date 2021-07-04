@@ -73,13 +73,14 @@ function Deck(props) {
     partTime: false,
     apprenticeship: false,
     workExperience: false,
+    virtual: false,
   });
 
   const handleChange = (event) => {
     setState({ ...state, [event.target.name]: event.target.checked });
   };
 
-  const { fullTime, partTime, apprenticeship, workExperience } = state;
+  const { fullTime, partTime, apprenticeship, workExperience, virtual } = state;
 
   return (
     <>
@@ -96,7 +97,7 @@ function Deck(props) {
               aria-labelledby="range-slider"
               marks={[{ value: 5, label: "£5.00" }, { value: 30, label: "£30.00" }]}
               min={5}
-              max={30}
+              max={50}
               step={0.5}
             />
             <Typography id="range-slider" gutterBottom>
@@ -132,6 +133,10 @@ function Deck(props) {
                 <FormControlLabel
                   control={<Checkbox checked={workExperience} onChange={handleChange} name="workExperience" />}
                   label="Work Experience"
+                />
+                <FormControlLabel
+                  control={<Checkbox checked={virtual} onChange={handleChange} name="virtual" />}
+                  label="Virtual"
                 />
               </FormGroup>
             </FormControl>
