@@ -6,6 +6,7 @@ import Header from "../components/header"
 import Sidebar from "../components/sidebar"
 import Education from "../components/profile/education"
 import Employment from "../components/profile/employment"
+import Skills from '../components/profile/skills';
 import ProfileRight from "../components/profile/ProfileSidebar"
 import { InferGetServerSidePropsType, GetServerSidePropsContext } from 'next';
 import { FormControlLabel, Switch } from '@material-ui/core';
@@ -80,7 +81,7 @@ const UserProfile = (props: InferGetServerSidePropsType<typeof getServerSideProp
                 />
                 <Education user={props.user}></Education>
                 <Employment user={props.user}></Employment>
-
+                <Skills user={props.user}></Skills>
               </div>
             </div>
 

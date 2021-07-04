@@ -9,7 +9,7 @@ import LocationSearchInput from "../../places-autocomplete"
 
 const AddEmployment = (props) => {
 
-    const { register, handleSubmit, watch, errors, control, formState } = useForm();
+    const { register, handleSubmit, watch, control, formState: { errors,isValid } } = useForm();
     const toggle_end = watch("currently_employed");
     const start_date = watch("start_date")
     const { user } = useAuth();
@@ -40,23 +40,17 @@ const AddEmployment = (props) => {
               <form onSubmit={handleSubmit(onSubmit)}>
                
                   <label className="modal-label">Company</label>
-                  <input className="modal-input" name="company" ref={register({ required: true })} style={errors.field ? {backgroundColor: "#ff7675"} : null}></input>
+                  <input className="modal-input" name="company" {...register("company",{required: true })} style={errors.field ? {backgroundColor: "#ff7675"} : null}></input>
                   <label className="modal-label">Job Title</label>
-                  <input className="modal-input" name="job_title" ref={register({ required: true })} style={errors.institution ? {backgroundColor: "#ff7675"} : null}></input>
+                  <input className="modal-input" name="job_title" {...register("job_title",{ required: true })} style={errors.institution ? {backgroundColor: "#ff7675"} : null}></input>
                   <label className="modal-label">Location</label>
+                  <input className="modal-input" name="location" {...register("location", { required: true })} style={errors.location ? {backgroundColor: "#ff7675"} : null}></input>
 
-                  <Controller
-                    name="location"
-                    control={control}
-                    defaultValue=""
-                    rules={{ required: true }}
-                    render={({ onChange, value }) => <LocationSearchInput error={errors.location} onChange={onChange} value={value} />}
-                  />
 
                   <label className="modal-label">Currently Employed</label>
-                  <input className="modal-input" name="currently_employed" type="checkbox" ref={register}></input>
+                  <input className="modal-input" name="currently_employed" type="checkbox" {...register("currently_employed")}></input>
                   <label className="modal-label">Start Date</label>
-                  <input className="modal-input" name="start_date" type="month" ref={register({ required: true })} style={errors.start_date ? {backgroundColor: "#ff7675"} : null}></input>
+                  <input className="modal-input" name="start_date" type="month" {...register("start_date", { required: true })} style={errors.start_date ? {backgroundColor: "#ff7675"} : null}></input>
                   {!(toggle_end) ? (
                       <>
                         <label className="modal-label">End Date</label>
@@ -64,7 +58,7 @@ const AddEmployment = (props) => {
                             className="modal-input" 
                             name="end_date" 
                             type="month" 
-                            ref={register({
+                            {...register("end_date", {
                                 required: true, 
                                 validate: {
                                     GreaterThanStart: value => {
@@ -72,7 +66,7 @@ const AddEmployment = (props) => {
                                     }
                                 }
                             })} 
-                            style={errors.end_date || formState.isValid  ? {backgroundColor: "#ff7675"} : null}
+                            style={errors.end_date ? {backgroundColor: "#ff7675"} : null}
                         />    
                       </>
                   ) : null}

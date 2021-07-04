@@ -99,7 +99,7 @@ const Matches = (props: InferGetServerSidePropsType<typeof getServerSideProps>) 
       <div className="wt-container">
         <Header user={props.user}></Header>
         <Sidebar></Sidebar>
-        <main className="wt-content matches-container">
+        <main className="wt-content matches-container medium-container">
           {loading === true && loadingMin === true ? 
           <div className="match-wrapper">
             {matches.length === 0 ? <div className="match-row"><h2 className="no-matches">No Matches Found!</h2></div> :

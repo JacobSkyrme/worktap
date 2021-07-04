@@ -23,6 +23,7 @@ import {EditContext} from "../../pages/profile"
 
 const Employment = (props) => {
     const edit = useContext(EditContext);
+    
 
     const [data, setData] = useState([]);
     const [showEdit, setShowEdit] = useState(false);

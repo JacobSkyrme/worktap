@@ -10,7 +10,7 @@ import LocationSearchInput from "../../places-autocomplete"
 
 
 const EditEducation = (props) => {
-    const { register, handleSubmit, watch, errors, control, formState } = useForm({
+    const { register, handleSubmit, watch, control, formState: { errors, isValid }} = useForm({
         defaultValues: {
             qualification: props.EditData.qualification,
             field: props.EditData.field,
@@ -21,6 +21,9 @@ const EditEducation = (props) => {
             end_date: props.EditData.end_date
         }
     });
+
+
+
     const toggle_end = watch("complete");
     const start_date = watch("start_date")
     const { user } = useAuth();   
@@ -61,7 +64,7 @@ const EditEducation = (props) => {
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <label>Qualification</label>
                     
-                    <select className="modal-input" name="qualification" ref={register({ required: true })} style={errors.qualification ? {backgroundColor: "#ff7675"} : null}>
+                    <select className="modal-input" name="qualification" {...register("qualification", { required: true })} style={errors.qualification ? {backgroundColor: "#ff7675"} : null}>
                         <option value="" selected disabled hidden>Choose here</option>
   
                         {qualification_Options.map((qualification_item, index) => 
@@ -70,23 +73,17 @@ const EditEducation = (props) => {
   
                     </select >                   
                     <label className="modal-label">Qualification Field</label>
-                    <input className="modal-input" name="field" ref={register({ required: true })} style={errors.field ? {backgroundColor: "#ff7675"} : null}></input>
+                    <input className="modal-input" name="field" {...register("field", { required: true })} style={errors.field ? {backgroundColor: "#ff7675"} : null}></input>
                     <label className="modal-label">School, College or University</label>
-                    <input className="modal-input" name="institution" ref={register({ required: true })} style={errors.institution ? {backgroundColor: "#ff7675"} : null}></input>
+                    <input className="modal-input" name="institution" {...register("institution", { required: true })} style={errors.institution ? {backgroundColor: "#ff7675"} : null}></input>
                     <label className="modal-label">Location</label>
-  
-                    <Controller
-                      name="location"
-                      control={control}
-                      defaultValue=""
-                      rules={{ required: true }}
-                      render={({ onChange, value }) => <LocationSearchInput error={errors.location} onChange={onChange} value={value} />}
-                    />
-  
+                    <input className="modal-input" name="location" {...register("location", { required: true })} style={errors.location ? {backgroundColor: "#ff7675"} : null}></input>
+
+
                     <label className="modal-label">Course Complete</label>
-                    <input className="modal-input" name="complete" type="checkbox" ref={register}></input>
+                    <input className="modal-input" name="complete" type="checkbox" {...register("complete")}></input>
                     <label className="modal-label">Start Date</label>
-                    <input className="modal-input" name="start_date" type="month" ref={register({ required: true })} style={errors.start_date ? {backgroundColor: "#ff7675"} : null}></input>
+                    <input className="modal-input" name="start_date" type="month" {...register("start_date", { required: true })} style={errors.start_date ? {backgroundColor: "#ff7675"} : null}></input>
                     {toggle_end ? (
                         <>
                           <label className="modal-label">End Date</label>
@@ -94,7 +91,7 @@ const EditEducation = (props) => {
                               className="modal-input" 
                               name="end_date" 
                               type="month" 
-                              ref={register({
+                              {...register("end_date",{
                                   required: true, 
                                   validate: {
                                       GreaterThanStart: value => {
@@ -102,7 +99,7 @@ const EditEducation = (props) => {
                                       }
                                   }
                               })} 
-                              style={errors.end_date || formState.isValid  ? {backgroundColor: "#ff7675"} : null}
+                            style={errors.end_date ? {backgroundColor: "#ff7675"} : null}
                           />    
                         </>
                     ) : null}

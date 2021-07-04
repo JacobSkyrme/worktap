@@ -3,8 +3,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faTools, faPen, faTrash, faPlusCircle} from "@fortawesome/free-solid-svg-icons"
 import {firebaseClient} from "../../firebase/firebaseClient"
 import 'firebase/firestore';
-import AddEducation from "./inputs/add-education"
-import EditEducation from "./inputs/edit-education"
+import AddSkill from "./inputs/add-skill"
+import EditSkill from "./inputs/edit-skill"
 import {EditContext} from "../../pages/profile"
 
 //TODO Add error checking on start - end date
@@ -42,13 +42,13 @@ const Skills = (props) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
     function FetchData(){
         let db = firebaseClient.firestore();
-        db.collection('users').doc(props.user.uid).collection('skills').get()
+        db.collection('users').doc(props.user.uid).collection('skill').get()
         .then(documents => {
     
           let dataHold = new Array();
 
             documents.forEach((doc) => dataHold.push({ ...doc.data(), id: doc.id }));
-            
+            console.log(dataHold)
          
           setData(dataHold)
           
@@ -68,7 +68,7 @@ const Skills = (props) => {
     //DELETE ITEM
     function Delete(id){
         let db = firebaseClient.firestore();
-        db.collection('users').doc(props.user.uid).collection('education').doc(id).delete()
+        db.collection('users').doc(props.user.uid).collection('skill').doc(id).delete()
         .then(res => {
             console.log(res)
             console.log("success")
@@ -82,12 +82,10 @@ const Skills = (props) => {
     //EACH ITEM IN LIST
     function ListItem(props) {
         return (
-            <li className="profile-row">
-                <h3 className="profile-row-heading">{props.value.qualification} in {props.value.field}</h3>
+            <li className="profile-row skill-row">
                 <div className="container">
                     <div className="profile-column">
-                        <h4 className="profile-row-text"> {props.value.institution} - {props.value.location}</h4>
-                        <span className="profile-row-text"> {props.value.start_date} to {props.value.complete === false ? "Present" : props.value.end_date}</span>
+                        <h4 className="profile-row-text"> {props.value.skill}</h4>
                     </div>
                     {edit ?
                         <div className="profile-edit-options-container">
@@ -112,6 +110,7 @@ const Skills = (props) => {
                     </div>
 
                     <div style={{width: "100%", padding: "0 1em", fontSize: "0.9rem"}}>
+                        <h3 className="profile-row-heading">Skills</h3>
                         <ul style={{width: "100%"}}>
                             {data.length > 0 ?
                             <>
@@ -132,11 +131,11 @@ const Skills = (props) => {
                 </div>
 
                 {showAdd
-                ? ( <AddEducation RefreshData={FetchData} close={() => {setShowAdd(false)}}></AddEducation>
+                ? ( <AddSkill RefreshData={FetchData} close={() => {setShowAdd(false)}}></AddSkill>
                 ) : null}
 
                 {showEdit
-                ? ( <EditEducation EditData={currentEdit} RefreshData={FetchData} close={() => {setShowEdit(false)}}></EditEducation>
+                ? ( <EditSkill EditData={currentEdit} RefreshData={FetchData} close={() => {setShowEdit(false)}}></EditSkill>
                 ) : null}
 
 

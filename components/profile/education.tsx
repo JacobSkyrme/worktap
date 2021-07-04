@@ -31,14 +31,8 @@ const Education = (props) => {
     const [showEdit, setShowEdit] = useState(false);
     const [showAdd, setShowAdd] = useState(false);
     const [currentEdit, setCurrentEdit] = useState({
-        complete: null,
-        field: null,
-        id: null,
-        institution: null,
-        location: null,
-        qualification: null,
-        start_date: null,
-        end_date: null,
+        skill: null,
+
     })
 
     //FETCHES USER DATA FROM DATABASE
