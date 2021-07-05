@@ -4,6 +4,7 @@ import { firebaseAdmin } from '../firebase/firebaseAdmin';
 import Header from "../components/header"
 import { faPoundSign, faUser, faMapPin, faTimes, faCheck } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import useWindowDimensions from "../components/windowDimensions"
 
 import { useAuth } from "../firebase/auth";
 import { InferGetServerSidePropsType, GetServerSidePropsContext } from 'next';
@@ -51,6 +52,7 @@ const Matches = (props: InferGetServerSidePropsType<typeof getServerSideProps>) 
   const [loadingMin, setLoadingMin] = useState(false);
   const [loading, setLoading] = useState(false);
   const [showDemo, setShowDemo] = useState(false);
+  const { height, width } = useWindowDimensions();
 
 
   useEffect(() => {
@@ -97,7 +99,7 @@ const Matches = (props: InferGetServerSidePropsType<typeof getServerSideProps>) 
   }
 
   return (
-    <div className="root">
+    <div className="root" style={{width: width, height: height}}>
       <div className="wt-container">
         <Header user={props.user}></Header>
         <Sidebar></Sidebar>

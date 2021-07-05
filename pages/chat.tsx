@@ -11,7 +11,7 @@ import { InferGetServerSidePropsType, GetServerSidePropsContext } from 'next';
 import 'firebase/firestore';
 import { firebaseClient } from "../firebase/firebaseClient"
 import { CircularProgress } from '@material-ui/core';
-
+import useWindowDimensions from "../components/windowDimensions"
 
 import Sidebar from '../components/sidebar';
 
@@ -46,10 +46,11 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
 const Chat = (props: InferGetServerSidePropsType<typeof getServerSideProps>) => {
 
   const { user } = useAuth();
+  const { height, width } = useWindowDimensions();
 
 
   return (
-    <div className="root">
+    <div className="root" style={{width: width, height: height}}>
       <div className="wt-container">
         <Header user={props.user}></Header>
         <Sidebar></Sidebar>

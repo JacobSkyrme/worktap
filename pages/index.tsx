@@ -8,6 +8,7 @@ import Sidebar from "../components/sidebar"
 import { CircularProgress } from '@material-ui/core';
 import { InferGetServerSidePropsType, GetServerSidePropsContext } from 'next';
 import { useAuth } from '../firebase/auth';
+import useWindowDimensions from "../components/windowDimensions"
 
 export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
   const cookies = nookies.get(ctx);
@@ -33,6 +34,7 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
 };
 
 const Jobs = (props: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+  const { height, width } = useWindowDimensions();
 
   const { user } = useAuth();
 
@@ -85,7 +87,7 @@ const Jobs = (props: InferGetServerSidePropsType<typeof getServerSideProps>) => 
   })
 
   return (
-    <div className="page-gradient root">
+    <div className="page-gradient root" style={{width: width, height: height}}>
       <Header user={props.user}></Header>
       <div className="wt-container">
         <Sidebar></Sidebar>

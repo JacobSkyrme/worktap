@@ -10,6 +10,7 @@ import Skills from '../components/profile/skills';
 import ProfileRight from "../components/profile/ProfileSidebar"
 import { InferGetServerSidePropsType, GetServerSidePropsContext } from 'next';
 import { FormControlLabel, Switch } from '@material-ui/core';
+import useWindowDimensions from "../components/windowDimensions"
 
 //TODO Implement all 3 profile input sections.                  1
 //TODO Setup account setup wizard.                              2
@@ -54,12 +55,13 @@ const UserProfile = (props: InferGetServerSidePropsType<typeof getServerSideProp
   const handleChange = (event) => {
     setEditMode(!editMode);
   };
+  const { height, width } = useWindowDimensions();
 
 
   return (
 
     <EditContext.Provider value={editMode}>
-      <div className="root">
+      <div className="root" style={{width: width, height: height}}>
 
         <div className="wt-container">
           <Header user={props.user}></Header>
