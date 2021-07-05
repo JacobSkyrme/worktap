@@ -21,7 +21,7 @@ a:hover {
 }
 
 html,
-body {
+body, .root {
   margin: 0;
   padding: 0;
   font-size: 16px;
@@ -1299,8 +1299,6 @@ a {
     height: auto;
     z-index: 110;
     order: 2;
-    bottom: 0;
-    position: fixed;
     border-top: 1px solid rgb(220, 220, 220)
   }
   .wt-content{
@@ -1309,7 +1307,6 @@ a {
   }
   .wt-container{
     flex-direction: column;
-    margin-bottom: 64px;
   }
   .wt-header{
     height: 60px;
