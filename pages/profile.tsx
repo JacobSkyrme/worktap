@@ -67,6 +67,7 @@ const UserProfile = (props: InferGetServerSidePropsType<typeof getServerSideProp
           <main className="wt-content">
             <div style={{ width: "100%" }}>
               <div className="medium-container profile-container">
+                <div className="edit-toggle-wrapper">
                 <FormControlLabel 
                   control={
                     <Switch
@@ -79,6 +80,8 @@ const UserProfile = (props: InferGetServerSidePropsType<typeof getServerSideProp
                   label="Toggle Edit"
                   className="edit-toggle"
                 />
+                </div>
+                
                 <Education user={props.user}></Education>
                 <Employment user={props.user}></Employment>
                 <Skills user={props.user}></Skills>
