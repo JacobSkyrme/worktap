@@ -19,7 +19,10 @@ a {
 a:hover {
   opacity: 0.8;
 }
-
+.wt-home-page{
+  overflow-x: hidden;
+  overflow-y: hidden;
+}
 html,
 body, .root {
   margin: 0;
@@ -1078,6 +1081,7 @@ a {
 
 .headerLogo{
   height: 100%;
+  width: auto;
   padding: 1em 0.8em
 }
 .headerLogoContainer{
@@ -1100,6 +1104,7 @@ a {
 .headerUserImage{
   height: 70px;
   border-radius: 100px;
+  width: auto;
   padding: 1.2em
 }
 .userPanel{
@@ -1305,6 +1310,7 @@ a {
   }
   .wt-container{
     flex-direction: column;
+    height: calc(100% - 134px);
   }
   .wt-header{
     height: 60px;
@@ -1344,6 +1350,22 @@ a {
   .profile-container{
     display: flex;
     flex-direction: column;
+  }
+  .headerLogo{
+    padding: 1em 0;
+  }
+  .headerLogoText{
+    padding: 0 0 0 0.5em;
+    font-size: 0.8em;
+  }
+  .headerUserImage{
+    display: none;
+  }
+  .userName{
+    font-size: 0.8em;
+  }
+  .headerLogoContainer{
+    width: auto;
   }
 }
 
