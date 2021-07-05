@@ -1302,6 +1302,7 @@ a {
     height: auto;
     z-index: 110;
     order: 2;
+    font-size: 12px;
     border-top: 1px solid rgb(220, 220, 220)
   }
   .wt-content{
@@ -1310,7 +1311,7 @@ a {
   }
   .wt-container{
     flex-direction: column;
-    height: calc(100% - 134px);
+    margin-bottom: 54px;
   }
   .wt-header{
     height: 60px;
@@ -1350,7 +1351,7 @@ a {
   .profile-container{
     display: flex;
     flex-direction: column;
-  }
+  } 
   .headerLogo{
     padding: 1em 0;
   }
