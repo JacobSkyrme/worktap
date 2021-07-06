@@ -1306,7 +1306,7 @@ a {
 
 
 @media only screen and (-webkit-min-device-pixel-ratio: 2){
-  .wt-container{
+  .deck{
     margin-bottom: 30px;
   }
 }
@@ -1325,7 +1325,6 @@ a {
     border-top: 1px solid rgb(220, 220, 220)
   }
   .deck{
-    margin-bottom: 54px;
     font-size: 14px;
   }
   .wt-content{
