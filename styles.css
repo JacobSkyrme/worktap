@@ -1053,7 +1053,6 @@ a {
 .match-wrapper{
   padding: 1em;
   width: 100%;
-  margin-bottom: 1px;
 }
 .match-row{
   width: 100%;
@@ -1324,6 +1323,9 @@ a {
     order: 2;
     font-size: 12px;
     border-top: 1px solid rgb(220, 220, 220)
+  }
+  .match-wrapper{
+    margin-bottom: 20px;
   }
   .headerLogo{
     width: 35px
