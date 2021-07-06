@@ -1092,7 +1092,7 @@ a {
 
 .headerLogo{
   height: 100%;
-  width: auto;
+  width: 80px;
   padding: 1em 0.8em
 }
 .headerLogoContainer{
