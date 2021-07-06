@@ -1305,6 +1305,12 @@ a {
 }
 
 
+@media only screen and (-webkit-min-device-pixel-ratio: 2){
+  .wt-container{
+    margin-bottom: 30px;
+  }
+}
+
 @media only screen and (max-width: 768px){
   .aside-nav {
     width: 100vw;
@@ -1328,8 +1334,9 @@ a {
   }
   .wt-container{
     flex-direction: column;
-    margin-bottom: 54px;
   }
+
+
   .wt-content{
     margin-bottom: 54px;
   }
