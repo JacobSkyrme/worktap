@@ -338,7 +338,7 @@ select:-webkit-autofill:focus {
   display: flex;
   flex-direction: column;
   padding: 1em;
-  justify-content: flex-s;
+  justify-content: flex-start;
 
 }
 
@@ -1317,6 +1317,9 @@ a {
     order: 2;
     font-size: 12px;
     border-top: 1px solid rgb(220, 220, 220)
+  }
+  .deck{
+    margin-bottom: 54px;
   }
   .wt-content{
     order: 1;
