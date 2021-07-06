@@ -1328,6 +1328,7 @@ a {
   }
   .wt-container{
     flex-direction: column;
+    margin-bottom: 54px;
   }
   .wt-content{
     margin-bottom: 54px;
