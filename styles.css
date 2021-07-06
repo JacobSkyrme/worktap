@@ -1324,6 +1324,12 @@ a {
     font-size: 12px;
     border-top: 1px solid rgb(220, 220, 220)
   }
+  .headerLogo{
+    width: 59px
+  }
+  .headerUserImage{
+    width: 70px;
+  }
   .deck{
     font-size: 14px;
   }
