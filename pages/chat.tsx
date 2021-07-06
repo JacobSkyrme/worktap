@@ -53,7 +53,9 @@ const Chat = (props: InferGetServerSidePropsType<typeof getServerSideProps>) => 
         <Sidebar></Sidebar>
         <main className="wt-content matches-container medium-container">
           <div className="messages">
-            <div className="message-wrapper" style={{borderTop: '1px solid #ddd'}}> 
+
+            <div className="message-wrapper" style={{borderTop: '1px solid #ddd', flexDirection: "column"}}> 
+              <div className="message-wrapper-row">
               <div className="ribbon check" style={{backgroundColor: '#2ecc71'}}>
                 <div className="content">
                   <FontAwesomeIcon className="svg-inline--fa fa-check fa-w-16" icon={faCheck}/>                
@@ -67,6 +69,19 @@ const Chat = (props: InferGetServerSidePropsType<typeof getServerSideProps>) => 
                 <h3 className="message-title matches-title job-title">Personal Cruise Advisor</h3>
                 <p>{"Thanks for applying for 'personal cruise advisor' You'll hear back from our HR team regarding your interview!"}</p>
               </div>
+              </div>
+
+              <div className="message-wrapper-row" style={{justifyContent: "flex-end"}}>
+              <div className="button message-button" style={{backgroundColor: "rgba(254, 165, 1, 1)"}}>
+                <span>Phone Interview</span>
+              </div>
+
+              <div className="button message-button" style={{backgroundColor: "rgba(255, 71, 87, 1)"}}>
+                <span>Online Interview</span>
+              </div>
+              </div>
+
+
             </div>
             <div className="message-wrapper">
               <div className="ribbon check" style={{backgroundColor: '#f1c40f'}}>
