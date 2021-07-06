@@ -1307,7 +1307,7 @@ a {
 
 @media only screen and (-webkit-min-device-pixel-ratio: 2){
   .deck{
-    margin-bottom: 50px;
+    margin-bottom: 30px;
   }
 }
 
@@ -1342,7 +1342,7 @@ a {
     margin-bottom: 54px;
   }
   .wt-content{
-    margin-bottom: 54px;
+    margin-bottom: 80px;
   }
   .wt-header{
     height: 60px;
