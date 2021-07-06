@@ -1053,6 +1053,7 @@ a {
 .match-wrapper{
   padding: 1em;
   width: 100%;
+  margin-bottom: 1px;
 }
 .match-row{
   width: 100%;
