@@ -902,6 +902,7 @@ a {
   padding: 0.8em;
   font-size: 0.9em;
   cursor: pointer;
+  box-shadow: 0 2px 4px #000000b8;
 }
 
 .message-button{
