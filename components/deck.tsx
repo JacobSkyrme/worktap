@@ -86,7 +86,8 @@ function Deck(props) {
     <>
       {filter ?
         <div className="filter-modal-wrapper">
-          <div className="filter-modal centre-translate">
+          <div className="filters-cant-work">
+          <div className="filter-modal">
             <Typography id="range-slider" gutterBottom>
               Pay Range (Per Hour)
             </Typography>
@@ -95,7 +96,7 @@ function Deck(props) {
               onChange={handlePaySlider}
               valueLabelDisplay="auto"
               aria-labelledby="range-slider"
-              marks={[{ value: 5, label: "£5.00" }, { value: 30, label: "£30.00" }]}
+              marks={[{ value: 5, label: "£5.00" }, { value: 50, label: "£50.00+" }]}
               min={5}
               max={50}
               step={0.5}
@@ -108,7 +109,7 @@ function Deck(props) {
               onChange={handleDistanceSlider}
               valueLabelDisplay="auto"
               aria-labelledby="range-slider"
-              marks={[{ value: 5, label: "0 Miles" }, { value: 500, label: "500 Miles" }]}
+              marks={[{ value: 5, label: "0 Miles" }, { value: 500, label: "500 Miles+" }]}
               min={0}
               max={500}
               step={25}
@@ -143,6 +144,7 @@ function Deck(props) {
             </div>
 
 
+          </div>
           </div>
         </div> : null}
       <div className='deck'>
