@@ -514,6 +514,7 @@ select:-webkit-autofill:focus {
   min-height: 200px;
   max-width: 864px;
   border-bottom: 1px solid #ccc;
+  margin-bottom: 75px;
 }
 
 .profile-container:nth-last-child(1) {
