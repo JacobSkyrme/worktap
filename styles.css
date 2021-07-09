@@ -385,7 +385,9 @@ select:-webkit-autofill:focus {
 .modal-container {
   width: 100%;
   max-width: 600px;
-  padding: 2em
+  padding: 2em;
+  height: 100%;
+  max-height: 800px;
 }
 
 .modal-close {
@@ -405,6 +407,7 @@ select:-webkit-autofill:focus {
   background-color: white;
   padding: 40px;
   border-radius: 1em;
+  overflow-y: auto;
 }
 
 .modal-heading {
@@ -995,9 +998,15 @@ a {
   right: 0.7em;
   bottom: 0;
   margin: 1em;
+  max-height: 65px;
   border-radius: 5px;
 }
-
+input {
+  -webkit-user-select: text; /* Chrome, Opera, Safari */
+  -moz-user-select: text; /* Firefox 2+ */
+  -ms-user-select: text; /* IE 10+ */
+  user-select: text; /* Standard syntax */
+}
 .button-interest {
   border-radius: 100%;
   background-color: white;
@@ -1430,7 +1439,7 @@ a {
     width: auto;
   }
   .demo-apply-button{
-    margin-bottom: 110px;
+    margin-bottom: 110px ;
   }
 }
 
