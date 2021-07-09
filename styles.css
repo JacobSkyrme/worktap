@@ -1281,6 +1281,10 @@ a {
   }
 
 }
+.card-collection{
+  max-height: 400px;
+}
+
 
 /* Ribbon */
 .ribbon {
