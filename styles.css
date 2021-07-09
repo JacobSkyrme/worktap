@@ -377,7 +377,7 @@ select:-webkit-autofill:focus {
   position: fixed;
   width: 100vw;
   height: 100vh;
-  z-index: 1000;
+  z-index: 1500 ;
   top: 0;
   left: 0;
 }
