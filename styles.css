@@ -1429,8 +1429,8 @@ a {
   .headerLogoContainer{
     width: auto;
   }
-  .match-demo-wrapper{
-    padding-bottom: 75px;
+  .demo-apply-button{
+    margin-bottom: 75px;
   }
 }
 
