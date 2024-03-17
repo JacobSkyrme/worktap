@@ -1,6 +1,8 @@
 <h1>Worktap</h1>
 <p>Worktap was a prototype project for a dating app style job searching app. The original Firebase project has since been deleted however below shows some off the project.</p>
 
+<div style="display: flex">
+
 https://github.com/JacobSkyrme/worktap/assets/32583261/dfb3552c-0af3-4c59-9608-7b4b3b54faa0
 
 ![0728f352a4b78156f9a4225c6097a6c1](https://github.com/JacobSkyrme/worktap/assets/32583261/1d48ee0f-d280-4652-ac96-efe53fa84ef6)
@@ -9,3 +11,4 @@ https://github.com/JacobSkyrme/worktap/assets/32583261/dfb3552c-0af3-4c59-9608-7
 ![cf8e351ebf4998b9a160bd5e35bcdfbd](https://github.com/JacobSkyrme/worktap/assets/32583261/402f7a99-5e86-4d63-ab1a-da0a07d31d0c)
 
 
+</div>
